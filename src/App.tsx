@@ -16,13 +16,13 @@ function App() {
     async function handleSubmitStopId(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (!stopIdLabel) {
-            setArrivalsError(`Please provide a Stop ID.`);
+            setArrivalsError(`Please provide a stop code.`);
             return;
         }
 
         const arrivals = await fetchArrivals(stopIdLabel);
         if (!arrivals) {
-            setArrivalsError(`Stop with ID "${stopIdLabel}" was not found.`);
+            setArrivalsError(`Stop with code "${stopIdLabel}" was not found.`);
             setStopIdLabel("");
             return;
         }
@@ -40,7 +40,7 @@ function App() {
                     variant="h1"
                     align="center"
                     gutterBottom
-                    style={{ fontSize: "4rem", fontWeight: "bold", color: "#0092b8" }}
+                    style={{ fontSize: "3.5rem", fontWeight: "bold", color: "#0092b8" }}
                 >
                     BusBoard
                 </Typography>
@@ -57,25 +57,30 @@ function App() {
             >
                 <Tabs value={selectedTab} onChange={(_event, value) => setSelectedTab(value)}>
                     <Tab label="Arrivals" id="tab-0" />
-                    <Tab label="Bus Times" id="tab-1" />
-                    <Tab label="Bus Stops" id="tab-2" />
+                    <Tab label="Bus Stops" id="tab-1" />
                 </Tabs>
                 <TabPanel value={selectedTab} index={0}>
                     <Typography
                         variant="h2"
+                        py={2}
                         gutterBottom
                         style={{ fontSize: "2rem", fontWeight: "bold", color: "#0092b8" }}
                     >
                         Fetch Arrivals
                     </Typography>
+                    <Typography variant={"body1"} gutterBottom>
+                        Enter the stop code of a bus station and see what buses are scheduled to
+                        arrive there.
+                    </Typography>
 
                     <Box
                         component="form"
+                        py={2}
                         onSubmit={handleSubmitStopId}
                         sx={{ display: "flex", flexDirection: "row", gap: "10px" }}
                     >
                         <TextField
-                            label="Stop ID"
+                            label="Stop Code"
                             name="stopId"
                             value={stopIdLabel}
                             onChange={(e) => setStopIdLabel(e.target.value)}
@@ -84,7 +89,7 @@ function App() {
                             variant="contained"
                             type="submit"
                             sx={{
-                                width: "200px",
+                                width: "150px",
                             }}
                         >
                             Show arrivals
@@ -96,7 +101,7 @@ function App() {
                             <Typography
                                 variant="h3"
                                 style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#0092b8" }}
-                            >{`Stop ID: ${stopId}`}</Typography>
+                            >{`Stop Code: ${stopId}`}</Typography>
                             <ArrivalsDataGrid arrivals={arrivals} />
                         </Box>
                     )}

@@ -3,4 +3,5 @@ export interface Arrival {
     lineName: string;
     towards: string;
     destinationName: string;
+    timeToStation: number;
 }

@@ -8,10 +8,11 @@ interface ArrivalsDataGridProps {
 
 export default function ArrivalsDataGrid({ arrivals }: ArrivalsDataGridProps) {
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
+        { field: "id", headerName: "ID", width: 100 },
         { field: "line", headerName: "Line", width: 100 },
         { field: "towards", headerName: "Towards", width: 400 },
         { field: "destination", headerName: "Destination", width: 300 },
+        { field: "timeToStation", headerName: "Arrives In (minutes)", width: 200 },
     ];
 
     const rows = arrivals.map((arrival) => ({
@@ -19,6 +20,7 @@ export default function ArrivalsDataGrid({ arrivals }: ArrivalsDataGridProps) {
         line: arrival.lineName,
         towards: arrival.towards,
         destination: arrival.destinationName,
+        timeToStation: arrival.timeToStation,
     }));
 
     return (
