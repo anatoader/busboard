@@ -7,17 +7,19 @@ interface ArrivalsDataGridProps {
 }
 
 export default function ArrivalsDataGrid({ arrivals }: ArrivalsDataGridProps) {
-    const columns = [
+    let columns = [
         { field: "id", headerName: "ID", width: 100 },
         { field: "line", headerName: "Line", width: 100 },
-        { field: "towards", headerName: "Towards", width: 400 },
-        { field: "destination", headerName: "Destination", width: 300 },
-        { field: "timeToStation", headerName: "Arrives In (minutes)", width: 200 },
+        { field: "stationName", headerName: "Station", width: 200 },
+        { field: "towards", headerName: "Towards", width: 350 },
+        { field: "destination", headerName: "Destination", width: 200 },
+        { field: "timeToStation", headerName: "Arrives In (minutes)", width: 150 },
     ];
 
-    const rows = arrivals.map((arrival) => ({
+    let rows = arrivals.map((arrival) => ({
         id: arrival.id,
         line: arrival.lineName,
+        stationName: arrival.stationName,
         towards: arrival.towards,
         destination: arrival.destinationName,
         timeToStation: arrival.timeToStation,
